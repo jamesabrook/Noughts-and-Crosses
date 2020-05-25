@@ -171,7 +171,6 @@ playGame(board)
 ```
 Output:
 ```
-
 Moves: 0
  O |   |  
 -----------
@@ -222,7 +221,6 @@ Moves: 6
  O |   | X
 
 'O'
-
 ```
  
 
@@ -322,7 +320,6 @@ playGame(board)
 ```
 Output:
 ```
-
 Moves: 0
    |   |  
 -----------
@@ -412,7 +409,6 @@ playGame(board)
 ```
 Output:
 ```
-
 Moves: 0
    |   | O
 -----------
