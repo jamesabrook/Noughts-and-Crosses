@@ -35,14 +35,14 @@ def printBoard(board):
     print("")
 
 ```
-```
-Output:
-   |   |  
------------
-   |   |  
------------
-   |   |  
 
+Output:
+```
+   |   |  
+-----------
+   |   |  
+-----------
+   |   |  
 ```
 
 ## Making Moves and Victory Conditions
@@ -169,8 +169,8 @@ def playGame(board):
 playGame(board)
 
 ```
-```
 Output:
+```
 
 Moves: 0
  O |   |  
@@ -320,8 +320,8 @@ def playGame(board):
 playGame(board)
 
 ```
-```
 Output:
+```
 
 Moves: 0
    |   |  
@@ -359,7 +359,6 @@ Moves: 4
    |   | X
 
 'O'
-
 ```
 Promising! It looks as though this method is a 'better' player than the initial random method. However, it still has its flaws. While it correctly identifies when it can win, it doesn't use this logic to block when the opponent can win. Let us fix this.
 
@@ -411,8 +410,8 @@ def playGame(board):
 playGame(board)
 
 ```
-```
 Output:
+```
 
 Moves: 0
    |   | O
@@ -464,7 +463,6 @@ Moves: 6
  O |   | X
 
 'O'
-
 ```
 
 Success! Our intuition tells us that each iteration has played 'better' than those before it.  We will test this next time and add some more strategies.
