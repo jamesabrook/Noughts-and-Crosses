@@ -18,13 +18,14 @@ If you want to follow along, the code below can also be found in Google Colabora
 ## Defining the board
 In order to easily reference any particular place on the grid, we will store the noughts and crosses grid as a list of 3 rows, where each row contains 3 elements. This will allow us to use a co-ordinate style system to identify each place. Initially we want the board to be blank.
 
-`Redcarpet.new("Hello World!")`{:.ruby}
-
-{{< highlight py3 >}}board = [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]]{{< /highlight >}}
+```python
+board = [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]]
+```
 
 Let us also define a method for displaying the current state of the board on the screen.
 
-{{< highlight py3 >}}def printBoard(board):
+```python
+def printBoard(board):
     # Prints the current state of the board to the screen
     print(" " + str(board[0][0]) + " | " + str(board[0][1]) + " | " + str(board[0][2]))
     print("-----------")
@@ -32,21 +33,24 @@ Let us also define a method for displaying the current state of the board on the
     print("-----------")
     print(" " + str(board[2][0]) + " | " + str(board[2][1]) + " | " + str(board[2][2]))
     print("")
-{{< /highlight >}}
+
+```
 Output:
-{{< highlight htm >}}   |   |  
------------
    |   |  
 -----------
    |   |  
-{{< /highlight >}}
+-----------
+   |   |  
+
+```
 
 ## Making Moves and Victory Conditions
 Now that we have a board to play the game on, we need a method to make a move.  The simplest strategy (and probably how we all started when we were kids) is to select a random place that doesn't already contain a counter.  To do this, we will generate two random numbers between 0 and 1 and translate this pair to a set of co-ordinates (row, column).  However, that space may already be occupied in which case we will need to select again until we find a blank space.  Once this has been achieved we will place our counter, great!
 
 Let's define our function that selects a random move. We will need to pass it the current board state and we will return a row/column position. Here is the code:
 
-{{< highlight py3 >}}from random import random
+```python
+from random import random
 import math
 def getRandomCell(board):
     # Pick a random place and test if it has been used yet.  
@@ -64,11 +68,13 @@ def getRandomCell(board):
 def makeMove(board, Me):
   row, col = getRandomCell(board)
   board[row][col] = Me
-{{< /highlight >}}
+
+```
 
 Now that we have a method to select a move to play, we now need a method to determine if there is a winner. We know that the game is won when either player is able to place a counter that completes a set of three in a row.  There are 8 winning combinations that achieve this and each correspond to one of the three rows, three columns and two diagonals. If each place in these combinations is equal and not empty then this will indicate a winner. Let us define a method of determining if all items in a list are equal.  Note how we need to be careful not to say that someone has won the game if we find an empty combination!
 
-{{< highlight py3 >}}def checkEqual(lst):
+```python
+def checkEqual(lst):
     # Checks to see if all elements in a given list are equal
     for item in range(len(lst)):
         if (lst[item] == " "): 
@@ -77,11 +83,13 @@ Now that we have a method to select a move to play, we now need a method to dete
 
     # Quick check to see if two lists are equal
     return lst[1:] == lst[:-1] 
-{{< /highlight >}}
+
+```
 
 Now that we can check if all items in a list are equal, we will check each winning combination.
 
-{{< highlight py3 >}}def checkVictory(board):
+```python
+def checkVictory(board):
     # Checks the current state of the board to see if anyone has won
     #############################################
     # Possible victories:
@@ -123,13 +131,15 @@ Now that we can check if all items in a list are equal, we will check each winni
 
     # If we reach this point then we have no winner
     return "Draw"
-{{< /highlight >}}
+
+```
  
 
 ## Time for a Game!
 We are now in a position to pit two players against each other.
 
-{{< highlight py3 >}}def playGame(board):  
+```python
+def playGame(board):  
     # Plays a game
     winner = "Draw"
     move = 0
@@ -156,10 +166,11 @@ We are now in a position to pit two players against each other.
     return winner
 
 playGame(board)
-{{< /highlight >}}
+
+```
 
 Output:
-{{< highlight htm >}}
+
 Moves: 0
  O |   |  
 -----------
@@ -210,7 +221,8 @@ Moves: 6
  O |   | X
 
 'O'
-{{< /highlight >}}
+
+```
  
 
 ## Adding Strategies
@@ -218,7 +230,8 @@ After playing a few games, we can see that the computer doesn't really understan
 
 We can do this by using a similar approach to checking if there has been a victory. However, instead of checking each combination for containing the same counter, we will count the number of our own counters (Me) and the number of our opponents counters (Enemy). If there is a set that has two of our counters and none of our opponents then we will select that place as our move, hence winning the game. If no such move is found then we will return -1, -1 to indicate this.
 
-{{< highlight py3 >}}def checkWinningCell(board, Me, Enemy):
+```python
+def checkWinningCell(board, Me, Enemy):
     # As with checkVictory here is a list of winning combinations that we need to look at
     #############################################
     # Possible victories:
@@ -260,11 +273,13 @@ We can do this by using a similar approach to checking if there has been a victo
         return [board[0][2], board[1][1], board[2][0]].index(" "), [board[2][0], board[1][1], board[0][2]].index(" ")
 
     return -1, -1
-{{< /highlight >}}
+
+```
 
 Let us update our makeMove & playGame methods to utilise this strategy:
 
-{{< highlight py3 >}}def makeMove(board, Me, Enemy, strategy):
+```python
+def makeMove(board, Me, Enemy, strategy):
   if (strategy == "Random"):
     row, col = getRandomCell(board)
   elif (strategy == "WinRandom"):
@@ -302,11 +317,12 @@ def playGame(board):
     return winner
 
 playGame(board)
-{{< /highlight >}}
+
+```
 
 Output:
 
-{{< highlight htm >}}Moves: 0
+Moves: 0
    |   |  
 -----------
  O |   |  
@@ -342,10 +358,12 @@ Moves: 4
    |   | X
 
 'O'
-{{< /highlight >}}
+
+```
 Promising! It looks as though this method is a 'better' player than the initial random method. However, it still has its flaws. While it correctly identifies when it can win, it doesn't use this logic to block when the opponent can win. Let us fix this.
 
-{{< highlight py3 >}}def makeMove(board, Me, Enemy, strategy):
+```python
+def makeMove(board, Me, Enemy, strategy):
   if (strategy == "Random"):
     row, col = getRandomCell(board)
   elif (strategy == "WinRandom"):
@@ -390,11 +408,12 @@ def playGame(board):
     return winner
 
 playGame(board)
-{{< /highlight >}}
+
+```
 
 Output:
 
-{{< highlight htm >}}Moves: 0
+Moves: 0
    |   | O
 -----------
    |   |  
@@ -444,6 +463,7 @@ Moves: 6
  O |   | X
 
 'O'
-{{< /highlight >}}
+
+```
 
 Success! Our intuition tells us that each iteration has played 'better' than those before it.  We will test this next time and add some more strategies.
