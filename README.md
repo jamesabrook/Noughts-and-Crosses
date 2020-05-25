@@ -35,6 +35,7 @@ def printBoard(board):
     print("")
 
 ```
+```
 Output:
    |   |  
 -----------
@@ -168,7 +169,7 @@ def playGame(board):
 playGame(board)
 
 ```
-
+```
 Output:
 
 Moves: 0
@@ -319,7 +320,7 @@ def playGame(board):
 playGame(board)
 
 ```
-
+```
 Output:
 
 Moves: 0
@@ -410,7 +411,7 @@ def playGame(board):
 playGame(board)
 
 ```
-
+```
 Output:
 
 Moves: 0
