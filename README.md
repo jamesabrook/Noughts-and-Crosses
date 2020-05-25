@@ -18,6 +18,8 @@ If you want to follow along, the code below can also be found in Google Colabora
 ## Defining the board
 In order to easily reference any particular place on the grid, we will store the noughts and crosses grid as a list of 3 rows, where each row contains 3 elements. This will allow us to use a co-ordinate style system to identify each place. Initially we want the board to be blank.
 
+`Redcarpet.new("Hello World!")`{:.ruby}
+
 {{< highlight py3 >}}board = [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]]{{< /highlight >}}
 
 Let us also define a method for displaying the current state of the board on the screen.
